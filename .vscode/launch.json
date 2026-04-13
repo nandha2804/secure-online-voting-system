@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SpringBootFormApplication<SpringBootForm>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.votingprojectdummy.SpringBootFormApplication",
+            "projectName": "SpringBootForm",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
