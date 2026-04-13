@@ -1374,7 +1374,7 @@
         (function () {
             /*!
              * https://github.com/gilmoreorless/css-background-parser
-             * Copyright © 2015 Gilmore Davidson under the MIT license: http://gilmoreorless.mit-license.org/
+             * Copyright © 2026 Gilmore Davidson under the MIT license: http://gilmoreorless.mit-license.org/
              */
             ! function (t) {
                 function e(t) {
@@ -5856,7 +5856,7 @@
         (function () {
             /*!
             Waypoints - 4.0.1
-            Copyright © 2011-2016 Caleb Troughton
+            Copyright © 2026 Caleb Troughton
             Licensed under the MIT license.
             https://github.com/imakewebthings/waypoints/blob/master/licenses.txt
             */
@@ -6717,7 +6717,7 @@
          * JavaScript Cookie v2.2.1
          * https://github.com/js-cookie/js-cookie
          *
-         * Copyright 2006, 2015 Klaus Hartl & Fagner Brack
+         * Copyright 2006, 2026 Klaus Hartl & Fagner Brack
          * Released under the MIT license
          */
         ! function (factory) {
