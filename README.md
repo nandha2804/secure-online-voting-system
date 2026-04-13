@@ -16,7 +16,7 @@ hassle-free user experience.
 - Screenshots
 - Technologies
 - Features
-- Authors
+
 ## Brief Description
 
 An online voting system is an online voting technique. 
@@ -111,15 +111,6 @@ The specific objectives of the project include:
 - Video Instructions
 - Decentralized Data
 - User Authentication
-
-
-## Authors
-
-- [Gunjan Ganguly](https://github.com/Themysticlees)
-- [Rajdeep Sarkar](https://github.com/Speak2Rajdeep)
-- [Sourav Bhadra](https://github.com/Sourav-Bhadra)
-- [Arpan Saha](https://github.com/ArpanSaha08)
-
 
 
 ## Demo
