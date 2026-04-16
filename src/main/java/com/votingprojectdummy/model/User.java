@@ -1,9 +1,12 @@
 package com.votingprojectdummy.model;
 
-import java.beans.Transient;
-import java.sql.Date;
+import javax.persistence.Transient;
+//import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
 
 @Entity
 public class User {
@@ -17,6 +20,9 @@ public class User {
 	private String password;
 	private String gender;
 	
+	//private Date birthday;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthday;
 	private String mobileno;
 

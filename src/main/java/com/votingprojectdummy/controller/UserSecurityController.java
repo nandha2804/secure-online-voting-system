@@ -227,7 +227,8 @@ public class UserSecurityController {
 			User user=new User();
 			user.setAddress(puser.getAddress());
 			user.setUsername(username);
-			user.setBirthday(puser.getBirthday());
+			//user.setBirthday(puser.getBirthday());
+			user.setBirthday(new java.sql.Date(puser.getBirthday().getTime()));
 			user.setCity(puser.getCity());
 			user.setEmail(puser.getEmail());
 			user.setFirstname(puser.getFirstname());

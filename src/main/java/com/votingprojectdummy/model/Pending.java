@@ -1,9 +1,16 @@
 package com.votingprojectdummy.model;
 
-import java.beans.Transient;
-import java.sql.Date;
+//import java.beans.Transient;
+//import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
+import java.util.Date;
+import javax.persistence.Transient;
+
+// ✅ ADD THESE IMPORTS (IMPORTANT)
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Pending {
@@ -19,9 +26,13 @@ public class Pending {
 	private String password;
 	private String gender;
 	
-	private Date birthday;
+	//private Date birthday;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)   // ✅ Correct
+    private Date birthday;
+	
 	private String mobileno;
-
 
 	private String photos;
 	private String adhaarpdf;
@@ -32,9 +43,6 @@ public class Pending {
 
 	private String role;
 	
-	
-	
-
 	public String getMobileno() {
 		return mobileno;
 	}
@@ -42,7 +50,6 @@ public class Pending {
 	public void setMobileno(String mobileno) {
 		this.mobileno = mobileno;
 	}
-
 
 	public String getState() {
 		return state;
@@ -92,7 +99,6 @@ public class Pending {
 		this.lastname = lastname;
 	}
 
-
 	public String getRole() {
 		return role;
 	}
@@ -112,7 +118,6 @@ public class Pending {
 	@Transient
     public String getPhotosImagePath() {
         if (photos == null || username == null) return null;
-         
         return "/user-photos/" + username + "/" + photos;
     }
 
@@ -123,6 +128,7 @@ public class Pending {
 
 		return "/user-photos/" + username + "/" + adhaarpdf;
 	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -130,6 +136,7 @@ public class Pending {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -154,7 +161,6 @@ public class Pending {
 		this.gender = gender;
 	}
 
-
 	public Date getBirthday() {
 		return birthday;
 	}
@@ -176,11 +182,6 @@ public class Pending {
 		return "Pending [address=" + address + ", birthday=" + birthday + ", city=" + city + ", email=" + email
 				+ ", firstname=" + firstname + ", gender=" + gender + ", lastname=" + lastname + ", mobileno="
 				+ mobileno + ", password=" + password + ", photos=" + photos + ", role=" + role + ", state=" + state
-				+ ", username=" + username +", zip=" + zip + "]";
+				+ ", username=" + username + ", zip=" + zip + "]";
 	}
-
-	
-
-
-
 }

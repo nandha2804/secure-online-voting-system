@@ -28,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.votingprojectdummy.helper.EmailTemplate;
 import com.votingprojectdummy.helper.Message;
 import com.votingprojectdummy.helper.SHA256;
+import com.votingprojectdummy.helper.FileUploadUtil;
 import com.votingprojectdummy.model.Candidate;
 import com.votingprojectdummy.model.Pending;
 import com.votingprojectdummy.model.User;
@@ -153,51 +154,56 @@ public class MainController {
 	// MultipartFile is for fetching any file, Modelattritube indicates the user
 	// model, the application
 	// will automatically fill the parameters with the details given by user.
+@PostMapping("/register")
+public String submitForm(
+        @ModelAttribute("pending") Pending pending,
+        @RequestParam("image") MultipartFile image,
+        @RequestParam("pdf") MultipartFile pdf,
+        Model model) {
 
-	@PostMapping("/register")
-	public String submitForm(@ModelAttribute("pending") Pending pending,
-			@RequestParam("image") MultipartFile multipartFile,
-			@RequestParam("pdf") MultipartFile multipartFile2) throws IOException {
+    try {
 
-		// Checking if username already exists
-		if (!(userservice.userExists(pending.getUsername()))) {
-			String fileName = multipartFile.getOriginalFilename();
-			String adhaarfileName = multipartFile2.getOriginalFilename();
-			// String Adhar=user.getUsername();
 
-			pending.setRole("ROLE_USER");
+        if (image.isEmpty() || pdf.isEmpty()) {
+            model.addAttribute("error", "Please upload both image and PDF");
+            return "register_new.html";
+        }
 
-			// decrypting the password before putting it in the db
-			pending.setPassword(passwordEncoder.encode(pending.getPassword()));
+        if (userservice.userExists(pending.getUsername())) {
+            return "exist.html";
+        }
 
-			// we are also storing the filename in db and storing the file in our local HD
-			pending.setPhotos(fileName);
-			pending.setAdhaarpdf(adhaarfileName);
+        
+        pending.setRole("ROLE_USER");
+        pending.setPassword(passwordEncoder.encode(pending.getPassword()));
 
-			// saving the user in the database
-			// repo is the bean of User repository
+        String imageName = image.getOriginalFilename();
+        String pdfName = pdf.getOriginalFilename();
 
-			Pending UserPending = pendingRepo.save(pending);
-			// Storing the entire path of the file
-			String uploadDir = "user-photos/" + UserPending.getUsername();
+        pending.setPhotos(imageName);
+        pending.setAdhaarpdf(pdfName);
 
-			// saving the file
-			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+        Pending savedUser = pendingRepo.save(pending);
 
-			FileUploadUtil.saveFile(uploadDir, adhaarfileName, multipartFile2);
-			System.out.println(pending);
 
-			return "redirect:/index";
-		}
-		// return "index.html";
-		else {
-			System.out.println("******* User exist **********");
-			// if username already exists, then return this page
-			return "exist.html";
-		}
+        String uploadDir = "user-photos/" + savedUser.getUsername();
 
-	}
+        File dir = new File(uploadDir);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
 
+        FileUploadUtil.saveFile(uploadDir, imageName, image);
+        FileUploadUtil.saveFile(uploadDir, pdfName, pdf);
+
+        return "redirect:/index";
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        model.addAttribute("error", "Something went wrong!");
+        return "register_new.html";
+    }
+}
 	// ----------------------UPDATE(POST)--------------------------------------------------------------
 	// //
 
