@@ -9,7 +9,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 @Entity
-public class User {
+public class User implements java.io.Serializable {
 	@Id
 	private String username; // Adhar ID
 

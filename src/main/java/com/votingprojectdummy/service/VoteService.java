@@ -37,6 +37,11 @@ public class VoteService {
         }
         
         Votedata lastEntry = voterepo.findLastEntry();
+        if (lastEntry == null) {
+            // If no previous votes, use "0" as the previous hash
+            lastEntry = new Votedata();
+            lastEntry.setCurrhash("0");
+        }
         System.out.println(lastEntry);
         System.out.println(adhhar+"-----"+name+"-----"+choice+"-----"+lastEntry.getCurrhash());
         String[] data = { adhhar, name, choice };
