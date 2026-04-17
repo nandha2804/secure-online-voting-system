@@ -204,6 +204,9 @@
                     <div th:if="${param.error}" class="text-danger">
                         Invalid user and password
                     </div>
+                    <div th:if="${param.pending}" class="text-warning">
+                        Your registration is pending admin approval. You will be able to log in once approved.
+                    </div>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="static-banner-one__form-fields">
